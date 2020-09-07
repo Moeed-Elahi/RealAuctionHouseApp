@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Real Auction House</string>
+    <string name="sign_in">Sign in</string>
+    <string name="register">Register</string>
+    <string name="password">Password</string>
+    <string name="email_address">Email Address</string>
+    <string name="title_activity_my_listing">MyListing</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="name">Name</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="surname">Surname</string>
+    <string name="physical_address">Physical Address</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="check_to_agree_to_the_terms_and_privacy_policy">Check to Agree to the Terms and Privacy Policy</string>
+    <string name="sign_up_for_auction_house_app">Sign up for Real Auction House</string>
+
+    <string name="menu_my_listing">My Listings</string>
+    <string name="menu_browse_listings">Listings</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_profil">Profile</string>
+    <string name="menu_add">Add New Listing</string>
+    <string name="menu_bids">My Bids</string>
+    <string name="take_picture">Take picture</string>
+    <string name="starting_price">Starting Price</string>
+    <string name="time_until_the_item_is_up">Time until the item is up</string>
+    <string name="date_until_the_item_is_up">Date until the item is up</string>
+    <string name="description">Description</string>
+    <string name="menu_about">About</string>
+    <string name="about_you_and_the_app">About you and the app</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="done">Done</string>
+    <string name="new_item">New Item</string>
+    <string name="remember_me">Remember me</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="menu_logout">Log out</string>
+    <string name="cancel">Cancel</string>
+    <string name="logout">Are you sure you want to log out?</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae risus eget nulla commodo rutrum eget nec magna. Morbi eu arcu id sem tristique vulputate. Proin nunc turpis, ornare sed tristique at, bibendum eu leo. In hac habitasse platea dictumst. In dui elit, cursus quis ligula id, tempor volutpat enim. Nunc porta bibendum magna, sed fermentum nibh tincidunt ut. Mauris molestie risus nec dolor rutrum lobortis. Proin sit amet augue convallis, venenatis risus non, sollicitudin felis. Vivamus venenatis tortor vel est laoreet, id congue enim hendrerit. Donec eu egestas nunc. Nunc nulla purus, tristique nec maximus et, aliquam id orci. Integer vel pellentesque quam, sed porta ante. Curabitur luctus lorem quis enim hendrerit elementum in in leo. Quisque sed lacus diam. Proin eget quam quis ante dapibus rutrum. Quisque rutrum ipsum vitae ullamcorper egestas. Sed ultrices, mauris eget convallis cursus, massa turpis interdum magna, ac porttitor velit enim ac dui. In dapibus mi at nisl tempus tempor. Ut pulvinar, felis eget volutpat semper, libero ante ultrices diam, sit amet posuere metus quam at sem. Sed facilisis lacinia leo, vulputate ullamcorper ex egestas ut. Aenean bibendum risus justo, sit amet pharetra ipsum iaculis eget. Sed a nibh ipsum. Maecenas viverra ultrices purus, ac tempor orci facilisis eu. Duis a neque facilisis, ullamcorper dolor et, lobortis sapien. Curabitur lacinia, eros eget scelerisque tempus, purus ipsum egestas sem, sed vehicula odio ante non ipsum. Morbi imperdiet enim et odio porta congue. Quisque non tellus urna. Duis dapibus semper dolor, nec efficitur ante malesuada sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Morbi sed fringilla metus, nec hendrerit enim. Nullam malesuada molestie nulla, eu maximus lectus aliquam a. Fusce elit enim, dignissim at arcu non, dignissim ullamcorper felis. Vestibulum vitae enim ac diam consequat egestas. Cras sed augue ultricies, luctus erat vel, convallis ipsum. Phasellus euismod iaculis lectus at cursus. Aliquam posuere ut ipsum a congue. Suspendisse mollis vehicula iaculis. Mauris suscipit felis nec mauris ultrices, vel aliquet elit rhoncus. In quis metus molestie, tempus arcu eget, dapibus nisl. In posuere, ipsum vel eleifend fermentum, metus sem posuere neque, id pretium quam mauris a odio. Vestibulum fermentum risus quam, ut pretium odio ultrices et. Quisque tempus ut sem sed gravida. Fusce maximus tristique tortor, non blandit ligula tempus eu. Nam hendrerit porttitor libero.</string>
+    <string name="about_page">The application is a prototype that simulates a real Action House Store</string>
+    <string name="about_page1">Designed and Build by Andrei Grecu</string>
+    <string name="search_listing">Search Listing</string>
+    <string name="search_title">Search Listing</string>
+    <string name="real_auction_house">Real Auction House</string>
+    <string name="type_password">Type Password</string>
+</resources>

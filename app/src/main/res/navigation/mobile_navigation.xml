@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.auctionhouse.ui.home.HomeFragment"
+        android:label="@string/menu_my_listing"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_bids"
+        android:name="com.example.auctionhouse.ui.bought.BidListFragment"
+        android:label="@string/menu_bids"
+        tools:layout="@layout/fragment_bought" />
+
+    <fragment
+        android:id="@+id/nav_add"
+        android:name="com.example.auctionhouse.ui.add.AddFragment"
+        android:label="@string/menu_add"
+        tools:layout="@layout/fragment_add" />
+
+    <fragment
+        android:id="@+id/nav_browser"
+        android:name="com.example.auctionhouse.ui.gallery.GalleryFragment"
+        android:label="@string/menu_browse_listings"
+        tools:layout="@layout/fragment_browser" />
+
+    <fragment
+        android:id="@+id/nav_profil"
+        android:name="com.example.auctionhouse.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_profil"
+        tools:layout="@layout/fragment_profil" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.example.auctionhouse.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
+</navigation>

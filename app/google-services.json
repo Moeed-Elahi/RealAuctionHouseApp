@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1000323865174",
+    "firebase_url": "https://auction-house-eddb6.firebaseio.com",
+    "project_id": "auction-house-eddb6",
+    "storage_bucket": "auction-house-eddb6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000323865174:android:72d50e6ea8f593041679f7",
+        "android_client_info": {
+          "package_name": "com.example.auctionhouse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1000323865174-dr8odri69a6t649vfirq608h0id73e2e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.auctionhouse",
+            "certificate_hash": "6b8f6f188beb5f4eea2aedd637b4a1df69a7dbe5"
+          }
+        },
+        {
+          "client_id": "1000323865174-lihsscs55fshbm8d8vqpuh7dpc7buocg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkTYiOiQliBMh8TKj0Q0fIFB2xmoUnWeI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1000323865174-lihsscs55fshbm8d8vqpuh7dpc7buocg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

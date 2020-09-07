@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4082DF</color>
+    <color name="colorPrimaryDark">#161616</color>
+    <color name="colorAccent">#00D8BF</color>
+
+    <color name="userBid">#FF4CAF50</color>
+    <color name="notUserBid">#C50E01</color>
+
+    <color name="colorText">#ffffff</color>
+    <color name="colorFragments">@color/colorPrimaryDark</color>
+    <color name="colorCard">#292626</color>
+    <color name="colorNavText">#9A9494</color>
+
+    <color name="colorWhite">#000000</color>
+    <color name="hints">#232020</color>
+
+</resources>
