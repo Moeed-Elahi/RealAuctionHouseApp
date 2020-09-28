@@ -28,7 +28,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SlideshowFragment extends Fragment{
 
     private CircleImageView profilePic;
-    private TextView addedListings, boughtListings, email, phone ,name, surname, address;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,24 +39,24 @@ public class SlideshowFragment extends Fragment{
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
         fab.hide();
 
-        name = root.findViewById(R.id.textView01);
+        TextView name = root.findViewById(R.id.textView01);
         name.setText(Prevalent.currentOnlineUser.getName());
 
-        address = root.findViewById(R.id.textPostalAddress);
+        TextView address = root.findViewById(R.id.textPostalAddress);
         address.setText(Prevalent.currentOnlineUser.getAddress());
 
-        email = root.findViewById(R.id.textView04);
+        TextView email = root.findViewById(R.id.textView04);
         String e = Prevalent.currentOnlineUser.getEmail().replace("-","@").replace("_",".");
         email.setText(e);
 
-        phone = root.findViewById(R.id.textView03);
+        TextView phone = root.findViewById(R.id.textView03);
         phone.setText(Prevalent.currentOnlineUser.getPhone());
 
-        surname = root.findViewById(R.id.textView02);
+        TextView surname = root.findViewById(R.id.textView02);
         surname.setText(Prevalent.currentOnlineUser.getSurname());
 
-        addedListings = root.findViewById(R.id.textView05);
-        boughtListings = root.findViewById(R.id.textView06);
+        TextView addedListings = root.findViewById(R.id.textView05);
+        TextView boughtListings = root.findViewById(R.id.textView06);
 
         profilePic = root.findViewById(R.id.profile_picture);
         Picasso.get().load(Prevalent.currentOnlineUser.getImage()).noFade().placeholder(R.drawable.download).into(profilePic);

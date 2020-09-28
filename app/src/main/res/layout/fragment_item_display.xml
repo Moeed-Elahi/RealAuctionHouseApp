@@ -16,8 +16,21 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="160dp"
         android:background="@drawable/buttons"
-        android:text="BID!"
+        android:text="@string/bid"
         android:textColor="@android:color/holo_red_dark" />
+
+    <HorizontalScrollView
+        android:id="@+id/horrizontal_layout"
+        android:layout_width="match_parent"
+        android:layout_height="260dp">
+        
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <ImageView
         android:id="@+id/product_image_details"
@@ -33,7 +46,7 @@
         android:layout_below="@id/product_image_details"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Product name"
+        android:text="@string/product_name"
         android:textColor="@color/colorText"
         android:textSize="32sp"
         android:textStyle="bold"/>
@@ -45,7 +58,7 @@
         android:layout_below="@id/product_name_details"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Product price"
+        android:text="@string/product_price"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="24sp"
         android:textStyle="bold"/>
@@ -57,7 +70,7 @@
         android:layout_below="@id/product_price_details"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Product description"
+        android:text="@string/product_description"
         android:textColor="@color/colorText"
         android:textSize="16sp"
         android:textStyle="normal"/>
@@ -74,7 +87,7 @@
         android:layout_marginEnd="166dp"
         android:background="@drawable/text_boxes"
         android:ems="10"
-        android:hint="Type amount to bid"
+        android:hint="@string/type_amount_to_bid"
         android:inputType="numberDecimal"
         android:textAlignment="center"
         android:textColor="@color/colorText"
@@ -90,7 +103,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:text="What are you waiting for? BID!"
+        android:text="@string/what_are_you_waiting_for_bid"
         android:textAlignment="center"
         android:textColor="@color/colorText"
         android:textSize="18sp" />
@@ -106,7 +119,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/buttons"
         android:gravity="center"
-        android:text="Choose currency"
+        android:text="@string/choose_currency"
         android:textAlignment="center"
         android:textColor="@color/colorText" />
 
@@ -120,7 +133,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:text="Time Remaining"
+        android:text="@string/time_remaining"
         android:textAlignment="center"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
@@ -137,7 +150,7 @@
         android:layout_marginEnd="285dp"
         android:layout_marginBottom="42dp"
         android:background="@drawable/buttons"
-        android:text="go Back"
+        android:text="@string/go_back"
         android:textColor="@color/colorText" />
 
     <TextView
@@ -152,7 +165,7 @@
         android:layout_marginEnd="24dp"
         android:text="userLastBid"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@color/colorText"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -167,7 +180,7 @@
         android:layout_marginEnd="38dp"
         android:layout_marginBottom="42dp"
         android:background="@drawable/buttons"
-        android:text="Remove product?"
+        android:text="@string/remove_product"
         android:textColor="@color/colorText" />
 
     <TextView
@@ -180,7 +193,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="24dp"
-        android:text="Don't get it slip your hands!"
+        android:text="@string/don_t_get_it_slip_your_hands"
         android:textAlignment="center"
         android:textColor="@color/colorText"
         android:textSize="18sp" />

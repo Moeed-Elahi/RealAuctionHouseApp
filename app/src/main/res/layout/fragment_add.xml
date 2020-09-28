@@ -150,7 +150,7 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/buttons"
         android:gravity="center"
-        android:text="Choose currency"
+        android:text="@string/choose_currency"
         android:textAlignment="center"
         android:textColor="@color/colorText"
         app:layout_constraintEnd_toEndOf="parent"

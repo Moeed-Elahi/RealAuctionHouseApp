@@ -21,7 +21,6 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PopupFragment extends DialogFragment {
-    private Button dismissButton;
     private CircleImageView profile_pic;
     private TextView name, surname, phone, email, address;
     private DatabaseReference databaseReference;
@@ -35,7 +34,7 @@ public class PopupFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.popup_profile, container, false);
 
-        dismissButton = view.findViewById(R.id.dismissButton);
+        Button dismissButton = view.findViewById(R.id.dismissButton);
         name = view.findViewById(R.id.name);
         surname = view.findViewById(R.id.surname);
         email = view.findViewById(R.id.email);
@@ -65,9 +64,11 @@ public class PopupFragment extends DialogFragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
+                        String emailId = snapshot.child("email").getValue().toString().replace("_",".");;
+                        emailId = emailId.replace("-","@");
                         name.setText(snapshot.child("name").getValue().toString());
                         surname.setText(snapshot.child("surname").getValue().toString());
-                        email.setText(snapshot.child("email").getValue().toString());
+                        email.setText(emailId);
                         address.setText(snapshot.child("address").getValue().toString());
                         phone.setText(snapshot.child("phone").getValue().toString());
 

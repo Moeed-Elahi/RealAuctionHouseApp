@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.auctionhouse.Model.Products;
+import com.example.auctionhouse.MyListing;
 import com.example.auctionhouse.Prevalent.Prevalent;
 import com.example.auctionhouse.R;
 import com.example.auctionhouse.ViewHolder.ProductViewHolder;
@@ -24,8 +25,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -82,7 +86,28 @@ public class HomeFragment extends Fragment {
                 @Override
                 protected void onBindViewHolder(@NonNull final ProductViewHolder holder, int position, @NonNull final Products model) {
                     holder.productName.setText(model.getName());
-                    holder.productPrice.setText("Last bid : " + model.getPrice() + " " + model.getCurrency() + " by " + model.getUserLastBid());
+
+                    if (Prevalent.currentOnlineUser.getEmail().equals(model.getUserUpload())) {
+                        String name = model.getUserLastBid().replace("_",".");
+                        name = name.replace("-","@");
+                        holder.productPrice.setText(name + " bid: " + model.getPrice() + " " + model.getCurrency());
+                    } else {
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(model.getUserUpload());
+                        ref.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    String name = snapshot.child("surname").getValue().toString() + " " + snapshot.child("name").getValue().toString();
+                                    holder.productPrice.setText("Last bid: " + model.getPrice() + model.getCurrency() + ". Upload by: " +name);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
 
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm");
                     String dateString = model.getDateDown();
@@ -106,15 +131,15 @@ public class HomeFragment extends Fragment {
                                                 holder.productTimeRemaining.setText(String.format("Time remaining: %02d hours %02d minutes %02d seconds",
                                                         TimeUnit.MILLISECONDS.toHours(diff) - TimeUnit.DAYS.toHours(TimeUnit.MILLISECONDS.toDays(diff)),
                                                         TimeUnit.MILLISECONDS.toMinutes(diff) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(diff)),
-                                                        TimeUnit.MILLISECONDS.toSeconds(diff) - TimeUnit.HOURS.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff))));
+                                                        TimeUnit.MILLISECONDS.toSeconds(diff) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff))));
                                             } else {
                                                 if (TimeUnit.MILLISECONDS.toMinutes(diff) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(diff)) != 0) {
                                                     holder.productTimeRemaining.setText(String.format("Time remaining: %02d minutes %02d seconds",
                                                             TimeUnit.MILLISECONDS.toMinutes(diff) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(diff)),
-                                                            TimeUnit.MILLISECONDS.toSeconds(diff) - TimeUnit.HOURS.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff))));
+                                                            TimeUnit.MILLISECONDS.toSeconds(diff) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff))));
                                                 } else {
                                                     holder.productTimeRemaining.setText(String.format("Time remaining: %02d seconds",
-                                                            TimeUnit.MILLISECONDS.toSeconds(diff) - TimeUnit.HOURS.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff))));
+                                                            TimeUnit.MILLISECONDS.toSeconds(diff) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff))));
                                                 }
                                             }
                                         } else {
@@ -124,12 +149,23 @@ public class HomeFragment extends Fragment {
                                                     TimeUnit.MILLISECONDS.toMinutes(diff) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(diff))));
                                         }
                                     } else {
-                                        if (date.getTime() - currentdate.getTime() == 0) {
-                                            holder.productTimeRemaining.setText("Auction is over!");
+                                        if (!holder.productTimeRemaining.getText().equals(R.string.auction_over)) {
+                                            holder.productTimeRemaining.setText(R.string.auction_over);
                                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Products").child(model.getPid());
                                             HashMap<String, Object> map = new HashMap<>();
                                             map.put("auction", "over");
                                             databaseReference.updateChildren(map);
+
+                                            DatabaseReference productsUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
+                                            if (model.getUserLastBid().equals(Prevalent.currentOnlineUser.getEmail()) && !model.getUserLastBid().equals(model.getUserUpload())) {
+                                                Prevalent.currentOnlineUser.setBoughtListings(Prevalent.currentOnlineUser.getBoughtListings() + 1);
+                                            }
+
+                                            productsUserRef.child(Prevalent.currentOnlineUser.getEmail());
+                                            HashMap<String, Object> mapU = new HashMap<>();
+                                            mapU.put("boughtListings", Prevalent.currentOnlineUser.getBoughtListings());
+                                            productsUserRef.child(Prevalent.currentOnlineUser.getEmail()).updateChildren(mapU);
+
                                         }
                                     }
                                 } catch (Exception e) {

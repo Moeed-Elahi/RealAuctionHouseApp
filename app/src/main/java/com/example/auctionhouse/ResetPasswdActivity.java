@@ -22,7 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class ResetPasswdActivity extends AppCompatActivity {
-    private Button cancel, reset;
     private EditText email, oldPasswd;
     private TextInputEditText passwd, confirmPasswd;
     private ProgressDialog loadingBar;
@@ -33,12 +32,11 @@ public class ResetPasswdActivity extends AppCompatActivity {
         setContentView(R.layout.reset_password);
         loadingBar = new ProgressDialog(this);
 
-        cancel = findViewById(R.id.cancel);
-        reset = findViewById(R.id.reset);
+        Button cancel = findViewById(R.id.cancel);
+        Button reset = findViewById(R.id.reset);
         email = findViewById(R.id.typeEmailAddress);
         passwd = findViewById(R.id.typePasswordE);
         confirmPasswd = findViewById(R.id.confirmPasswordE);
-        oldPasswd = findViewById(R.id.oldPassword);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,21 +70,18 @@ public class ResetPasswdActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    String oldPass = snapshot.child("pass").getValue().toString();
 
-                    if (oldPass.equals(oldPasswd.getText().toString())) {
+                    if (passwd.getText().toString().equals(confirmPasswd.getText().toString())) {
                         RootRef.child("pass").setValue(passwd.getText().toString());
                         loadingBar.dismiss();
-                        Toast.makeText(ResetPasswdActivity.this, "Password reseted", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ResetPasswdActivity.this, "Password changed.", Toast.LENGTH_LONG).show();
                         Intent i = new Intent(ResetPasswdActivity.this,MainActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
                     } else {
                         loadingBar.dismiss();
-                        Toast.makeText(ResetPasswdActivity.this, "Old password is wrong, try again!", Toast.LENGTH_SHORT).show();
-                        email.getText().clear();
+                        Toast.makeText(ResetPasswdActivity.this, "Passwords do not match!", Toast.LENGTH_SHORT).show();
                         passwd.getText().clear();
-                        oldPasswd.getText().clear();
                         confirmPasswd.getText().clear();
                     }
                 } else {
@@ -94,7 +89,6 @@ public class ResetPasswdActivity extends AppCompatActivity {
                     Toast.makeText(ResetPasswdActivity.this, "This email doesn't exists. Please try again.",Toast.LENGTH_LONG).show();
                     email.getText().clear();
                     passwd.getText().clear();
-                    oldPasswd.getText().clear();
                     confirmPasswd.getText().clear();
                 }
             }
@@ -113,5 +107,11 @@ public class ResetPasswdActivity extends AppCompatActivity {
             resetPasswd();
             return null;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ResetPasswdActivity.this,MainActivity.class);
+        startActivity(intent);
     }
 }

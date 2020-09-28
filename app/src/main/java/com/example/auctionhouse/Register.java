@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,12 +29,19 @@ import java.util.HashMap;
 public class Register extends AppCompatActivity {
 
     private ProgressDialog loadingBar;
+    private CheckBox Box;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
         loadingBar = new ProgressDialog(this);
+
+        String checkBoxText = "Check to Agree to the <a href='https://www.termsandconditionsgenerator.com/'> Terms and Conditions</a>";
+        Box = findViewById(R.id.checkBox);
+
+        Box.setText(Html.fromHtml(checkBoxText));
+        Box.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     public void registerButton(View view) {
@@ -71,11 +80,10 @@ public class Register extends AppCompatActivity {
 
                                         Intent intent = new Intent(Register.this,MainActivity.class);
                                         startActivity(intent);
-                                        loadingBar.dismiss();
                                     } else {
                                         Toast.makeText(Register.this, "Network Error: Please try again...", Toast.LENGTH_SHORT).show();
-                                        loadingBar.dismiss();
                                     }
+                                    loadingBar.dismiss();
                                 }
                             });
 
@@ -118,7 +126,7 @@ public class Register extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(Object[] objects) {
-            CheckBox Box = findViewById(R.id.checkBox);
+
 
             EditText Name = findViewById(R.id.editTextTextPersonName);
             EditText Surname = findViewById(R.id.editTextTextPersonName2);
@@ -156,5 +164,11 @@ public class Register extends AppCompatActivity {
             return null;
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Register.this,MainActivity.class);
+        startActivity(intent);
     }
 }

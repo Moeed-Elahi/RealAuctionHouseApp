@@ -127,6 +127,7 @@ public class MyListing extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        menuItem.setChecked(true);
         displayView(menuItem.getItemId());
         return true;
     }

@@ -21,7 +21,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/icon_foreground" />
+            app:srcCompat="@mipmap/icon_foreground"
+            android:contentDescription="@string/appicon" />
 
 
         <TextView
@@ -30,7 +31,7 @@
             android:layout_height="46dp"
             android:layout_marginTop="52dp"
             android:gravity="center|center_horizontal|center_vertical"
-            android:text="About us"
+            android:text="@string/about_us"
             android:textColor="@color/colorText"
             android:textSize="24sp"
             android:textStyle="bold"

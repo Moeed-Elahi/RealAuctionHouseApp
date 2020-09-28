@@ -33,6 +33,7 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -79,27 +80,30 @@ public class SettingsFragment extends Fragment {
 
         if (isDarkModeOn) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            nightMode.setText("Disable Dark Mode");
+            nightMode.setText(R.string.disable_dark_mode);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            nightMode.setText("Enable Dark Mode");
+            nightMode.setText(R.string.enable_dark_mode);
         }
 
         nightMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
+                navigationView.getMenu().getItem(0).setChecked(true);
+
                 if (isDarkModeOn) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     editor.putBoolean("isDarkModeOn", false);
                     editor.putBoolean("isSwitchChecked", false);
                     editor.apply();
-                    nightMode.setText("Enable Dark Mode");
+                    nightMode.setText(R.string.enable_dark_mode);
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     editor.putBoolean("isDarkModeOn", true);
                     editor.putBoolean("isSwitchChecked", true);
                     editor.apply();
-                    nightMode.setText("Disable Dark Mode");
+                    nightMode.setText(R.string.disable_dark_mode);
                 }
             }
         });
@@ -135,7 +139,7 @@ public class SettingsFragment extends Fragment {
                 final AlertDialog dialogBuilder = new AlertDialog.Builder(getContext()).create();
                 View dialogView = getLayoutInflater().inflate(R.layout.change_phone, null);
 
-                final EditText confirm = dialogView.findViewById(R.id.edt_confirm_phone);
+                final EditText confirm = dialogView.findViewById(R.id.edt_confirm_pass);
                 Button button1 = dialogView.findViewById(R.id.buttonSubmit);
                 Button button2 = dialogView.findViewById(R.id.buttonCancel);
 
@@ -153,6 +157,7 @@ public class SettingsFragment extends Fragment {
                         if (confirm.getText().toString().isEmpty()) {
                             Toast.makeText(getActivity(), "You did not confirm the password", Toast.LENGTH_SHORT).show();
                         } else if (confirm.getText().toString().equals(Prevalent.currentOnlineUser.getPass())) {
+                            Prevalent.currentOnlineUser.setPhone(newPhone.getText().toString());
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
                             HashMap<String, Object> map = new HashMap<>();
                             map.put("phone", newPhone.getText().toString());
@@ -199,6 +204,7 @@ public class SettingsFragment extends Fragment {
                         if (confirm.getText().toString().isEmpty()) {
                             Toast.makeText(getActivity(), "You did not confirm the password", Toast.LENGTH_SHORT).show();
                         } else if (confirm.getText().toString().equals(Prevalent.currentOnlineUser.getPass())) {
+                            Prevalent.currentOnlineUser.setAddress(newAddress.getText().toString());
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
                             HashMap<String, Object> map = new HashMap<>();
                             map.put("address", newAddress.getText().toString());
@@ -268,9 +274,19 @@ public class SettingsFragment extends Fragment {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             imageUri = result.getUri();
 
+
+            ProgressDialog progressBar = new ProgressDialog(getContext());
+            progressBar.setTitle("Updating profile picture");
+            progressBar.setMessage("Please wait...");
+            progressBar.setCanceledOnTouchOutside(false);
+            progressBar.show();
+
             new MyAsyncTaskUploadPic().execute();
 
+            progressBar.dismiss();
+
             profilePic.setImageURI(imageUri);
+            ((MyListing) getActivity()).setPic();
         } else {
             Toast.makeText(getContext(), "Error... Try again later.", Toast.LENGTH_SHORT).show();
         }
@@ -350,27 +366,10 @@ public class SettingsFragment extends Fragment {
 
     class MyAsyncTaskUploadPic extends AsyncTask {
 
-        final ProgressDialog progressBar = new ProgressDialog(getContext());
-
-        @Override
-        protected void onPreExecute() {
-            progressBar.setTitle("Updating profile picture");
-            progressBar.setMessage("Please wait...");
-            progressBar.setCanceledOnTouchOutside(false);
-            progressBar.show();
-            super.onPreExecute();
-        }
-
         @Override
         protected Object doInBackground(Object[] objects) {
             uploadProfilePic();
             return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object o) {
-            progressBar.dismiss();
-            super.onPostExecute(o);
         }
     }
 

@@ -76,7 +76,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (UserEmailKey != null && UserPassKey != null) {
             if (!TextUtils.isEmpty(UserEmailKey) && !TextUtils.isEmpty(UserPassKey)) {
+
+                loadingBar.setTitle("Logged in already");
+                loadingBar.setMessage("Please wait...");
+                loadingBar.setCanceledOnTouchOutside(false);
+                loadingBar.show();
+
                 new MyAsyncTaskAllowAcces().execute();
+
+                loadingBar.dismiss();
             }
         }
 
@@ -139,7 +147,15 @@ public class MainActivity extends AppCompatActivity {
             email = emailId.getText().toString().replace(".","_");
             email = email.replace("@","-");
             hideKeyboard(this);
+
+            loadingBar.setTitle("Logging into account");
+            loadingBar.setMessage("Please wait, while we check the credentials.");
+            loadingBar.setCanceledOnTouchOutside(false);
+            loadingBar.show();
+
             new MyAsyncTaskLogin().execute();
+
+            loadingBar.dismiss();
         }
 
     }
@@ -213,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
         builder = new AlertDialog.Builder(this);
         builder.setMessage("Connect to the internet!")
                 .setCancelable(false)
-                .setPositiveButton("Done?", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (isConnected(context)) {
@@ -246,12 +262,6 @@ public class MainActivity extends AppCompatActivity {
 
     class MyAsyncTaskAllowAcces extends AsyncTask {
 
-        protected void onPreExecute() {
-            loadingBar.setTitle("Logged in already");
-            loadingBar.setMessage("Please wait...");
-            loadingBar.setCanceledOnTouchOutside(false);
-            loadingBar.show();
-        }
 
         @Override
         protected Object doInBackground(Object[] objects) {
@@ -261,12 +271,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class MyAsyncTaskLogin extends AsyncTask {
-        protected void onPreExecute() {
-            loadingBar.setTitle("Logging into account");
-            loadingBar.setMessage("Please wait, while we check the credentials.");
-            loadingBar.setCanceledOnTouchOutside(false);
-            loadingBar.show();
-        }
 
         @Override
         protected Object doInBackground(Object[] objects) {

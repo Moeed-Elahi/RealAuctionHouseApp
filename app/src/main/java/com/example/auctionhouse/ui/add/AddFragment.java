@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,6 +31,8 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -89,7 +92,7 @@ public class AddFragment extends Fragment {
 
         mImageView = root.findViewById(R.id.imageView);
         mCaptureButton = root.findViewById(R.id.button_take_picture);
-        Button mDoneButton = root.findViewById(R.id.button5);
+        final Button mDoneButton = root.findViewById(R.id.button5);
 
         chooseCurrency = root.findViewById(R.id.textView8);
         chooseCurrency.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +160,6 @@ public class AddFragment extends Fragment {
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        // Do your code from onActivityResult
                         setPic();
                         mCaptureButton.setEnabled(true);
                         mCaptureButton.setText("Retake Picture");
@@ -169,28 +171,48 @@ public class AddFragment extends Fragment {
         mCaptureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                // Ensure that there's a camera activity to handle the intent
-                if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    // Create the File where the photo should go
-                    File photoFile = null;
-                    try {
-                        photoFile = createImageFile();
-                    } catch (IOException ex) {
-                        // Error occurred while creating the File
-                        Toast.makeText(getContext(), "Error: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.e("NU E bine", "onClick: A ajuns aici");
-                        return;
-                    }
-                    // Continue only if the File was successfully created
-                    if (photoFile != null) {
-                        imageUri = FileProvider.getUriForFile(getContext(),
-                                "com.example.auctionhouse",
-                                photoFile);
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                        mLauncher.launch(takePictureIntent);
-                    }
-                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Choose a method!")
+                        .setPositiveButton("Choose from gallery", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // Gallery intent
+                                Toast.makeText(getContext(), "This is not available yet", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("Take a photo from camera", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // Camera intent
+                                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                // Ensure that there's a camera activity to handle the intent
+                                if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                                    // Create the File where the photo should go
+                                    File photoFile = null;
+                                    try {
+                                        photoFile = createImageFile();
+                                    } catch (IOException ex) {
+                                        // Error occurred while creating the File
+                                        Toast.makeText(getContext(), "Error: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Log.e("NU E bine", "onClick: A ajuns aici");
+                                        return;
+                                    }
+                                    // Continue only if the File was successfully created
+                                    if (photoFile != null) {
+                                        imageUri = FileProvider.getUriForFile(getContext(),
+                                                "com.example.auctionhouse",
+                                                photoFile);
+                                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                                        mLauncher.launch(takePictureIntent);
+                                    }
+                                }
+                            }
+                        })
+                        .setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User cancelled the dialog
+                            }
+                        });
+                // Create the AlertDialog object and return it
+                builder.show();
             }
         });
 
@@ -198,6 +220,14 @@ public class AddFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (ValidateProduct() == 1) {
+                    mCaptureButton.setVisibility(View.GONE);
+                    mCaptureButton.setVisibility(View.INVISIBLE);
+
+                    mDoneButton.setVisibility(View.INVISIBLE);
+                    mDoneButton.setVisibility(View.GONE);
+
+                    Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+                    toolbar.setTitle("My Listings");
                     FragmentManager fragmentManager = getFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_add, new HomeFragment());
@@ -239,16 +269,18 @@ public class AddFragment extends Fragment {
             Toast.makeText(AddFragment.this.getContext(), "Please choose the time until the item is up...", Toast.LENGTH_SHORT).show();
             return 0;
         } else {
+
+            loadingBar.setTitle("Add New Product");
+            loadingBar.setMessage("Please wait, while we are adding the product...");
+            loadingBar.setCanceledOnTouchOutside(false);
+            loadingBar.show();
             new MyAsyncTask().execute();
+            loadingBar.dismiss();
             return 1;
         }
     }
 
     private void StoreInfo() {
-//        loadingBar.setTitle("Add New Product");
-//        loadingBar.setMessage("Please wait, while we are adding the product...");
-//        loadingBar.setCanceledOnTouchOutside(false);
-//        loadingBar.show();
 
         Calendar cldr = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("yyyy/MMM/dd");
@@ -259,7 +291,7 @@ public class AddFragment extends Fragment {
 
         final String productRandomKey = UUID.randomUUID().toString();
 
-        final StorageReference filePath = productImageRef.child(imageUri.getLastPathSegment() + productRandomKey + ".jpg");
+        final StorageReference filePath = productImageRef.child(productRandomKey);
 
         final UploadTask uploadTask = filePath.putFile(imageUri);
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -309,6 +341,8 @@ public class AddFragment extends Fragment {
                         productMap.put("userLastBid", Prevalent.currentOnlineUser.getEmail());
                         productMap.put("currency", chooseCurrency.getText().toString());
                         productMap.put("auction", "open");
+                        productMap.put("boughtListings", 0);
+                        productMap.put("uploadedListings", 0);
 
                         productUsersRef.child(Prevalent.currentOnlineUser.getEmail()).child("uploadedListings").setValue(Prevalent.currentOnlineUser.getUploadedListings() + 1);
                         Prevalent.currentOnlineUser.setUploadedListings(Prevalent.currentOnlineUser.getUploadedListings() + 1);
@@ -388,24 +422,10 @@ public class AddFragment extends Fragment {
     }
 
     class MyAsyncTask extends AsyncTask {
-
-        @Override
-        protected void onPreExecute() {
-            loadingBar.setTitle("Add New Product");
-            loadingBar.setMessage("Please wait, while we are adding the product...");
-            loadingBar.setCanceledOnTouchOutside(false);
-            loadingBar.show();
-        }
-
         @Override
         protected Object doInBackground(Object[] objects) {
             StoreInfo();
             return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object o) {
-            loadingBar.dismiss();
         }
     }
 

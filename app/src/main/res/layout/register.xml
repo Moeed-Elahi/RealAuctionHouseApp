@@ -35,22 +35,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userEmail" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/editTextPassword"-->
-<!--        android:layout_width="316dp"-->
-<!--        android:layout_height="48dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:background="@drawable/text_boxes"-->
-<!--        android:ems="10"-->
-<!--        android:hint="@string/password"-->
-<!--        android:inputType="textPassword"-->
-<!--        android:password="true"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textColor="@color/colorAccent"-->
-<!--        android:textColorHint="@color/hints"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress2" />-->
 
     <EditText
         android:id="@+id/editTextTextPersonName3"
@@ -67,22 +51,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
-
-<!--    <EditText-->
-<!--        android:id="@+id/editTextPassword2"-->
-<!--        android:layout_width="316dp"-->
-<!--        android:layout_height="48dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:background="@drawable/text_boxes"-->
-<!--        android:ems="10"-->
-<!--        android:hint="@string/confirm_password"-->
-<!--        android:inputType="textPassword"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textColor="@color/colorAccent"-->
-<!--        android:textColorHint="@color/hints"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />-->
 
     <EditText
         android:id="@+id/editTextTextEmailAddress2"

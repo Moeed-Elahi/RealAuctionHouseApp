@@ -50,28 +50,4 @@
                 android:onClick="logout"
                 android:title="@string/menu_logout"/>
     </group>
-
-
-<!--    <item android:title="@string/about_you_and_the_app"-->
-<!--        app:itemTextColor="@color/colorText">-->
-<!--        <menu>-->
-<!--            <item-->
-<!--                android:id="@+id/nav_profil"-->
-<!--                android:icon="@drawable/ic_account_circle"-->
-<!--                android:title="@string/menu_profil" />-->
-<!--            <item-->
-<!--                android:id="@+id/nav_settings"-->
-<!--                android:icon="@drawable/ic_settings"-->
-<!--                android:title="@string/menu_settings" />-->
-<!--            <item-->
-<!--                android:id="@+id/nav_about"-->
-<!--                android:icon="@drawable/ic_help"-->
-<!--                android:title="@string/menu_about" />-->
-<!--            <item-->
-<!--                android:id="@+id/nav_logout"-->
-<!--                android:icon="@drawable/ic_log_out"-->
-<!--                android:title="@string/menu_logout"-->
-<!--                android:onClick="logout"/>-->
-<!--        </menu>-->
-<!--    </item>-->
 </menu>

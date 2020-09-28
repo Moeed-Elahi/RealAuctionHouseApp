@@ -15,7 +15,8 @@
         android:layout_centerVertical="true"
         android:alpha=".30"
         android:scaleType="centerCrop"
-        app:srcCompat="@mipmap/icon_foreground" />
+        app:srcCompat="@mipmap/icon_foreground"
+        android:contentDescription="@string/appicon" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"

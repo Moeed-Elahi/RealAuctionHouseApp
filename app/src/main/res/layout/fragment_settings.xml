@@ -57,7 +57,7 @@
                 android:layout_marginTop="17dp"
                 android:layout_marginEnd="58dp"
                 android:background="@drawable/buttons"
-                android:text="Update?"
+                android:text="@string/update"
                 android:textColor="@color/colorText"
                 android:textSize="12sp" />
 
@@ -73,7 +73,7 @@
                 android:layout_toStartOf="@+id/button6"
                 android:background="@drawable/text_boxes"
                 android:ems="10"
-                android:hint="Phone Number"
+                android:hint="@string/phone_number"
                 android:inputType="phone"
                 android:textAlignment="center"
                 android:textColor="@color/colorText"
@@ -108,7 +108,7 @@
                 android:layout_marginTop="17dp"
                 android:layout_marginEnd="58dp"
                 android:background="@drawable/buttons"
-                android:text="Change?"
+                android:text="@string/change_"
                 android:textColor="@color/colorText"
                 android:textSize="12sp" />
 
@@ -140,7 +140,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="58dp"
                 android:background="@drawable/buttons"
-                android:text="Update Address?"
+                android:text="@string/update_address"
                 android:textColor="@color/colorText"
                 android:textSize="12sp" />
 
@@ -155,7 +155,7 @@
                 android:layout_marginEnd="158dp"
                 android:layout_marginBottom="50dp"
                 android:background="@drawable/buttons"
-                android:text="Delete Account?"
+                android:text="@string/delete_account"
                 android:textAlignment="center"
                 android:textColor="@color/colorText"
                 android:textSize="12sp" />
@@ -170,7 +170,7 @@
                 android:layout_marginStart="58dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="58dp"
-                android:text="Enable Dark Mode"
+                android:text="@string/enable_dark_mode"
                 android:textColor="@color/colorText" />
         </RelativeLayout>
 
